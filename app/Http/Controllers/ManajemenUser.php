@@ -85,7 +85,7 @@ class ManajemenUser extends Controller
             $valids[$data] = "required";
         }
         $request->validate($valids);
-
+        $request['password'] = Hash::make($request->password);
         $user->update($request->all());
 
         return redirect()->route('user.index');
