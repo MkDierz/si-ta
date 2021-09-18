@@ -15,7 +15,7 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.Datatables', true)
 @php
-$columns = ['No.', 'Nama', 'NIM', 'Email', 'Role', 'Action'];
+$columns = ['No.', 'Nama', 'NIM', 'Judul', 'Status', 'Action'];
 @endphp
 @section('content')
     <div class="card">
@@ -31,7 +31,7 @@ $columns = ['No.', 'Nama', 'NIM', 'Email', 'Role', 'Action'];
                 <tbody>
                     @foreach ($data as $i => $a)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
+                            <td style="width: 10px">{{ $i + 1 }}</td>
                             <td>{{ $a['nama_mhs'] }}</td>
                             <td>{{ $a['NIM'] }}</td>
                             <td>{{ $a['judul_ta'] }}</td>
