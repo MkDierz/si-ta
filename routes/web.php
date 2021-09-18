@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManajemenUser;
 use App\Http\Controllers\DataMahasiswa;
+use App\Http\Controllers\DataDosen;
 
 
 /*
@@ -30,6 +31,7 @@ Route::prefix('admin')->group(function () {
     Route::get('', [AdminController::class, 'index']);
     Route::resources([
         'user' => ManajemenUser::class,
-        'mahasiswa' => DataMahasiswa::class
+        'mahasiswa' => DataMahasiswa::class,
+        'dosen' => DataDosen::class
     ]);
 });
