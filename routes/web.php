@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManajemenUser;
+use App\Http\Controllers\DataMahasiswa;
 
 
 /*
@@ -27,8 +28,8 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->group(function () {
     Route::get('', [AdminController::class, 'index']);
-    Route::resource(
-        'user', ManajemenUser::class
-        
-    );
+    Route::resources([
+        'user' => ManajemenUser::class,
+        'mahasiswa' => DataMahasiswa::class
+    ]);
 });
