@@ -31,6 +31,6 @@ class CreatePembimbingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembimbing');
+        Schema::dropIfExists('pembimbings');
     }
 }
