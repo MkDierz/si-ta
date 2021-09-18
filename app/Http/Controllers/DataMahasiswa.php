@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mahasiswa;
 
 class DataMahasiswa extends Controller
 {
@@ -13,7 +14,8 @@ class DataMahasiswa extends Controller
      */
     public function index()
     {
-        //
+        $data = Mahasiswa::all();
+        return view('admin.D_mahasiswa.index', compact('data'));
     }
 
     /**
@@ -23,7 +25,7 @@ class DataMahasiswa extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.D_mahasiswa.create');
     }
 
     /**
@@ -34,7 +36,30 @@ class DataMahasiswa extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->except('_token') as $data => $value) {
+            if ($data == 'foto') {
+                $valids[$data] = "mimes:jpeg,jpg,png,gif|required|max:10000";
+            } else {
+                $valids[$data] = "required";
+            }
+        }
+        // dd($valids);
+        $request->validate($valids);
+
+        $input = $request->all();
+
+        $name = $request->NIM . '-' . $request->nama_mhs;
+
+        if ($file = $request->file('foto')) {
+            $destinationPath = 'uploads/';
+            $filename = $name . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            $input['foto'] = "$filename";
+        }
+
+        Mahasiswa::create($input);
+
+        return redirect()->route('mahasiswa.index');
     }
 
     /**
@@ -43,9 +68,9 @@ class DataMahasiswa extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('admin.D_mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
@@ -54,9 +79,9 @@ class DataMahasiswa extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        return view('admin.D_mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -66,9 +91,29 @@ class DataMahasiswa extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        foreach ($request->except('_token') as $data => $value) {
+            $valids[$data] = "required";
+        }
+        $request->validate($valids);
+
+        $input = $request->all();
+
+        $name = $request->NIM . '-' . $request->nama_mhs;
+
+        if ($file = $request->file('foto')) {
+            $destinationPath = 'uploads/';
+            $filename = $name . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            $input['foto'] = "$filename";
+        } else {
+            unset($input['foto']);
+        }
+
+        $mahasiswa->update($input);
+
+        return redirect()->route('mahasiswa.index');
     }
 
     /**
@@ -77,8 +122,9 @@ class DataMahasiswa extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index');
     }
 }
