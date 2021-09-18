@@ -13,7 +13,7 @@ class CreateKehadiransTable extends Migration
      */
     public function up()
     {
-        Schema::create('kehadiran', function (Blueprint $table) {
+        Schema::create('kehadirans', function (Blueprint $table) {
             $table->id();
             $table->integer('id_mahasiswa');
             $table->date('tgl');

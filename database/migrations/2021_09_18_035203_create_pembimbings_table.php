@@ -13,7 +13,7 @@ class CreatePembimbingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembimbing', function (Blueprint $table) {
+        Schema::create('pembimbings', function (Blueprint $table) {
             $table->id();
             $table->string('NIP');
             $table->string('nama');
