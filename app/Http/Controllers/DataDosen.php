@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pembimbing;
 
 class DataDosen extends Controller
 {
@@ -13,7 +14,8 @@ class DataDosen extends Controller
      */
     public function index()
     {
-        //
+        $data = Pembimbing::all();
+        return view('admin.D_dosen.index', compact('data'));
     }
 
     /**
@@ -23,7 +25,7 @@ class DataDosen extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.D_dosen.create');
     }
 
     /**
@@ -34,7 +36,30 @@ class DataDosen extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->except('_token') as $data => $value) {
+            if ($data == 'foto') {
+                $valids[$data] = "mimes:jpeg,jpg,png,gif|required|max:10000";
+            } else {
+                $valids[$data] = "required";
+            }
+        }
+        // dd($valids);
+        $request->validate($valids);
+
+        $input = $request->all();
+
+        $name = $request->NIP . '-' . $request->nama;
+
+        if ($file = $request->file('foto')) {
+            $destinationPath = 'uploads/';
+            $filename = $name . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            $input['foto'] = "$filename";
+        }
+
+        Pembimbing::create($input);
+
+        return redirect()->route('dosen.index');
     }
 
     /**
@@ -45,7 +70,8 @@ class DataDosen extends Controller
      */
     public function show($id)
     {
-        //
+        $pembimbing = Pembimbing::find($id);
+        return view('admin.D_dosen.show', compact('pembimbing'));
     }
 
     /**
@@ -56,7 +82,8 @@ class DataDosen extends Controller
      */
     public function edit($id)
     {
-        //
+        $pembimbing = Pembimbing::find($id);
+        return view('admin.D_dosen.edit', compact('pembimbing'));
     }
 
     /**
@@ -68,7 +95,30 @@ class DataDosen extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->except('_token') as $data => $value) {
+            $valids[$data] = "required";
+        }
+        $request->validate($valids);
+
+
+        $input = $request->all();
+        unset($input['_token']);
+        unset($input['_method']);
+
+        $name = $request->NIP . '-' . $request->nama;
+
+        if ($file = $request->file('foto')) {
+            $destinationPath = 'uploads/';
+            $filename = $name . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            $input['foto'] = "$filename";
+        } else {
+            unset($input['foto']);
+        }
+
+        Pembimbing::where('id', $id)->update($input);
+
+        return redirect()->route('dosen.index');
     }
 
     /**
@@ -79,6 +129,7 @@ class DataDosen extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pembimbing::where('id', $id)->delete();
+        return redirect()->route('dosen.index');
     }
 }
