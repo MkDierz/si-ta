@@ -12,17 +12,7 @@
             <h3>Selamat datang admin</h3>
         </div>
         <div class="card-body">
-            <div>sss</div>
+            <div></div>
         </div>
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-        console.log('Hi!');
-    </script>
 @stop
