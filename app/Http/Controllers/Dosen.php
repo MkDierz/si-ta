@@ -50,7 +50,7 @@ class Dosen extends Controller
             'catatan_ppb' => 'required'
         ]);
         Kehadiran::where('id', $id)->update($request->except(['_token','_method']));
-        return redirect()->route('konsultasi.show', $id);
+        return redirect()->route('dosen');
     }
 
 }
