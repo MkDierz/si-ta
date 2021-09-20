@@ -17,12 +17,12 @@ class CreateKehadiransTable extends Migration
             $table->id();
             $table->integer('id_mahasiswa');
             $table->date('tgl');
-            $table->char('hari');
+            $table->day('hari');
             $table->time('waktuhadir');
             $table->time('waktupulang');
             $table->text('kemajuan');
-            $table->text('konsultasi');
-            $table->text('catatan_ppb');
+            $table->text('konsultasi')->nullable();
+            $table->text('catatan_ppb')->nullable();
             $table->timestamps();
         });
     }

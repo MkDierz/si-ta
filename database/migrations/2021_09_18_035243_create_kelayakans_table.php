@@ -17,8 +17,8 @@ class CreateKelayakansTable extends Migration
             $table->id();
             $table->integer('id_mahasiswa');
             $table->date('tgl_daftar');
-            $table->string('status_kelayakan');
-            $table->text('ket');
+            $table->string('status_kelayakan')->nullable();
+            $table->text('ket')->nullable();
             $table->timestamps();
         });
     }

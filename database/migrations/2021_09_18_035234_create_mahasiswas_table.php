@@ -22,7 +22,7 @@ class CreateMahasiswasTable extends Migration
             $table->char('j_kelamin');
             $table->char('HP');
             $table->text('judul_ta');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('foto');
             $table->timestamps();
         });
