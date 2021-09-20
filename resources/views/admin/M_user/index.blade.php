@@ -15,7 +15,7 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.Datatables', true)
 @php
-$columns = ['No', 'Nama', 'NIM/NIP', 'Email', 'Role'];
+$columns = ['Nama', 'NIM/NIP', 'Email', 'Role', 'action'];
 @endphp
 @section('content')
     <div class="card">
@@ -37,18 +37,26 @@ $columns = ['No', 'Nama', 'NIM/NIP', 'Email', 'Role'];
                             <td>{{ $a['nim_nip'] }}</td>
                             <td>{{ $a['email'] }}</td>
                             <td>{{ $a['role'] }}</td>
-                            <td>
-                                <form action="{{ route('user.destroy', $a->id) }}" method="POST">
+                            <td style="width: 40px">
+                                <nobr>
+                                    <form action="{{ route('user.destroy', $a->id) }}" method="POST">
 
-                                    <a class="btn btn-info" href="{{ route('user.show', $a->id) }}">Show</a>
+                                        <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{ route('user.show', $a->id) }}">
+                                            <i class="fa fa-lg fa-fw fa-eye"></i>
+                                        </a>
 
-                                    <a class="btn btn-primary" href="{{ route('user.edit', $a->id) }}">Edit</a>
+                                        <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{ route('user.edit', $a->id) }}">
+                                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                                        </a>
 
-                                    @csrf
-                                    @method('DELETE')
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow">
+                                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </nobr>
                             </td>
                         </tr>
                     @endforeach
