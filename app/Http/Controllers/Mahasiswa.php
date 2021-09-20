@@ -31,7 +31,7 @@ class Mahasiswa extends Controller
         $request->validate($valids);
         $nim = Auth::user()->nim_nip;
         $id_mahasiswa = Mhs::where('NIM', $nim)->get('id')->toArray()[0]['id'];
-        $request['id_mahasiswa'] = $id_mahasiswa['id'];
+        $request['id_mahasiswa'] = $id_mahasiswa;
         Kehadiran::create($request->all());
         return redirect()->route('mhs');
     }
