@@ -43,7 +43,7 @@ class ManajemenUser extends Controller
         }
         $request->validate($valids);
         $request['password'] = Hash::make($request->password);
-        dd($request->all());
+        // dd($request->all());
         User::create($request->all());
 
         return redirect()->route('user.index');
