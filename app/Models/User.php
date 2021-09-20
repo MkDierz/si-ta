@@ -56,11 +56,11 @@ class User extends Authenticatable
         }
         if (Gate::allows('pembimbing')) {
             $foto = Pembimbing::where('NIP', Auth::user()->nim_nip)->first('foto')['foto'];
-            return $url.$foto;
+            return asset($url.$foto);
         }
         if (Gate::allows('mahasiswa')) {
             $foto = Mahasiswa::where('NIM', Auth::user()->nim_nip)->first('foto')['foto'];
-            return $url.$foto;
+            return asset($url.$foto);
         }
 
     }
