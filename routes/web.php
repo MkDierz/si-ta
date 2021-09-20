@@ -27,8 +27,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::prefix('admin')->group(function () {
-    Route::get('', [AdminController::class, 'index']);
+Route::middleware(['can:admin'])->prefix('admin')->group(function () {
+    Route::get('', [AdminController::class, 'index'])->name('admin');
     Route::resources([
         'user' => ManajemenUser::class,
         'mahasiswa' => DataMahasiswa::class,
