@@ -30,6 +30,6 @@ class CreateKelayakansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelayakan');
+        Schema::dropIfExists('kelayakans');
     }
 }

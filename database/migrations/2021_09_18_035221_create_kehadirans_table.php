@@ -17,7 +17,7 @@ class CreateKehadiransTable extends Migration
             $table->id();
             $table->integer('id_mahasiswa');
             $table->date('tgl');
-            $table->day('hari');
+            $table->char('hari');
             $table->time('waktuhadir');
             $table->time('waktupulang');
             $table->text('kemajuan');
@@ -34,6 +34,6 @@ class CreateKehadiransTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kehadiran');
+        Schema::dropIfExists('kehadirans');
     }
 }
