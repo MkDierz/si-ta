@@ -5,6 +5,9 @@
 @section('content_header')
     <h1>Admin Dashboard</h1>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+@endsection
 
 @section('content')
     <div class="row">
@@ -126,27 +129,32 @@
 
 @section('js')
     <script>
-        $(function() {
+        $(document).ready(function() {
             $('#data').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
             });
-        });
-        $(function() {
             $('#data1').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
             });
         });
+        // $(function() {
+        //     $('#data1').DataTable({
+        //         "paging": true,
+        //         "lengthChange": true,
+        //         "searching": true,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": true,
+        //         "responsive": true,
+        //     });
+        // });
     </script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 @stop
