@@ -12,9 +12,9 @@ class Mahasiswa extends Controller
 {
     public function index()
     {
-        $kehadiran = Kehadiran::where('id_mahasiswa', Auth::user()->nim_nip)->get();
-        $kelayakan = kelayakan::where('id_mahasiswa', Auth::user()->nim_nip)->get();
-        // dd($kelayakan);
+        $id = Mhs::where('NIM', Auth::user()->nim_nip)->first('id');
+        $kehadiran = Kehadiran::where('id_mahasiswa', $id->id)->get();
+        $kelayakan = kelayakan::where('id_mahasiswa', $id->id)->get();
         return view('mhs.index', compact('kehadiran', 'kelayakan'));
     }
 
