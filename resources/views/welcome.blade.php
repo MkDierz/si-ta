@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>E-surat Landing</title>
+    <title>SI-TA Landing</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -47,7 +47,7 @@
             @guest
                 <a href="{{ route('login') }}" class="get-started-btn scrollto">Login</a>
             @else
-                <a href="/home" class="get-started-btn scrollto">Home</a>
+                <a href="{{ route('home') }}" class="get-started-btn scrollto">Home</a>
             @endguest
 
         </div>
@@ -62,7 +62,7 @@
             @guest
                 <a href="{{ route('login') }}" class="get-started-btn scrollto">Login</a>
             @else
-                <a href="/home" class="get-started-btn scrollto">Home</a>
+                <a href="{{ route('home') }}" class="get-started-btn scrollto">Home</a>
             @endguest
             <img src="assets/img/hero-img.png" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
         </div>
