@@ -57,7 +57,7 @@
     <section id="hero" class="d-flex align-items-center">
 
         <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
-            <h1>Sistem Informasi Tugas Akhir</h1>
+            <h1>Sistem informasi pemantaun tugas akhir</h1>
             <h2></h2>
             @guest
                 <a href="{{ route('login') }}" class="get-started-btn scrollto">Login</a>
