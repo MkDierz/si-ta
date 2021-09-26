@@ -5,6 +5,9 @@
 @section('content_header')
     <h1>Dashboard</h1>
 @stop
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
+@endsection
 @php
 $columns = [
     [
@@ -129,7 +132,7 @@ function searchForId($id, $array)
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="data1" class="table table-bordered table-hover dataTable dtr-inline" role="grid">
+                    <table id="data2" class="table table-bordered table-hover dataTable dtr-inline" role="grid">
                         <thead>
                             <tr role="row">
                                 @foreach ($columns[2] as $col)
@@ -165,28 +168,28 @@ function searchForId($id, $array)
 
 
 @section('js')
-    <script>
-        $(function() {
-            $('#data').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
+<script>
+    $(document).ready(function() {
+        $('#data').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
         });
-        $(function() {
-            $('#data1').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
+        $('#data1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
         });
-    </script>
+        $('#data2').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
+        });
+    });
+</script>
+<script src="{{ asset('assets/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>
 @stop
