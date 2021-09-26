@@ -6,7 +6,7 @@
     <h1>Admin Dashboard</h1>
 @stop
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
 @endsection
 
 @section('content')
@@ -114,7 +114,7 @@
                             @foreach ($kelayakan as $i => $a)
                                 <tr>
                                     <td>{{ $i + 1 }}</td>
-                                    <td>{{ $mhs->where('id', $a->id)[0]['nama_mhs'] }}</td>
+                                    <td>{{ $mhs->where('id', $a->id)[0]['nama_mhs'] ?? '' }}</td>
                                     <td>{{ $a->tgl_daftar }}</td>
                                     <td>{{ $a->status_kelayakan }}</td>
                                     <td>{{ $a->ket }}</td>
@@ -143,18 +143,7 @@
                 ]
             });
         });
-        // $(function() {
-        //     $('#data1').DataTable({
-        //         "paging": true,
-        //         "lengthChange": true,
-        //         "searching": true,
-        //         "ordering": true,
-        //         "info": true,
-        //         "autoWidth": true,
-        //         "responsive": true,
-        //     });
-        // });
     </script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('assets/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>
 @stop
