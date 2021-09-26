@@ -17,6 +17,9 @@
 @php
 $columns = ['No.', 'Nama', 'NIM', 'Judul', 'Status', 'Action'];
 @endphp
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
+@endsection
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -68,16 +71,21 @@ $columns = ['No.', 'Nama', 'NIM', 'Judul', 'Status', 'Action'];
 
 @section('js')
     <script>
-        $(function() {
+        $(document).ready(function() {
             $('#data').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
+            });
+            $('#data1').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
             });
         });
     </script>
+    <script src="{{ asset('assets/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>
 @stop
