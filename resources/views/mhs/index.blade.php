@@ -8,7 +8,9 @@
 @php
 $columns = [['Tanggal', 'Hari', 'Waktu Hadir', 'Waktu Pulang', 'Kemajuan', 'Konsultasi', 'Catatan Pembimbing'], ['Tanggal Daftar', 'Status Kelayakan', 'keterangan']];
 @endphp
-
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
+@endsection
 @section('content')
     <div class="row">
         <div class="col">
@@ -140,28 +142,22 @@ $columns = [['Tanggal', 'Hari', 'Waktu Hadir', 'Waktu Pulang', 'Kemajuan', 'Kons
 
 
 @section('js')
-    <script>
-        $(function() {
-            $('#data').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
+<script>
+    $(document).ready(function() {
+        $('#data').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
         });
-        $(function() {
-            $('#data1').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
+        $('#data1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ]
         });
-    </script>
+    });
+</script>
+<script src="{{ asset('assets/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>
 @stop
