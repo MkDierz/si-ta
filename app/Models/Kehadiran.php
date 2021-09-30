@@ -17,5 +17,6 @@ class Kehadiran extends Model
         'kemajuan',
         'konsultasi',
         'catatan_ppb',
+        'file'
     ];
 }
