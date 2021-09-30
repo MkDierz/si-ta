@@ -26,13 +26,28 @@ class Mahasiswa extends Controller
     public function kehadiran_save(Request $request)
     {
         foreach ($request->except('_token') as $data => $value) {
-            $valids[$data] = "required";
+            if ($data == 'file') {
+                $valids[$data] = "mimes:pdf,doc,docx|required|max:10000";
+            } else {
+                $valids[$data] = "required";
+            }
         }
         $request->validate($valids);
+
+        $input = $request->all();
+
         $nim = Auth::user()->nim_nip;
         $id_mahasiswa = Mhs::where('NIM', $nim)->get('id')->toArray()[0]['id'];
-        $request['id_mahasiswa'] = $id_mahasiswa;
-        Kehadiran::create($request->all());
+        $input['id_mahasiswa'] = $id_mahasiswa;
+
+        $name = $nim . '-' . $request->tgl . '' . $request->waktuhadir;
+        if ($file = $request->file('file')) {
+            $destinationPath = 'uploads/';
+            $filename = $name . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            $input['file'] = "$filename";
+        }
+        Kehadiran::create($input);
         return redirect()->route('mhs');
     }
 
