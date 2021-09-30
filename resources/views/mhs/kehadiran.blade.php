@@ -7,6 +7,7 @@
 @stop
 
 @section('plugins.TempusDominusBs4', true)
+@section('plugins.BsCustomFileInput', true)
 
 @section('content')
     <div class="card">
@@ -74,6 +75,14 @@
                             </div>
                         </x-slot>
                     </x-adminlte-textarea>
+
+                    <x-adminlte-input-file name="file" igroup-size="sm" placeholder="Choose a file..." label="File revisi" accept="application/msword, application/pdf">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-gradient-info">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input-file>
 
                     <x-adminlte-button class="btn-flat" type="submit" label="Submit" theme="success"
                         icon="fas fa-lg fa-save" />

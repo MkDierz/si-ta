@@ -73,8 +73,10 @@
                                 <th style="width:40px;">No.</th>
                                 <th>Tanggal</th>
                                 <th>Nama Mahasiswa</th>
+                                <th>Nama Pembimbing</th>
                                 <th>Kemajuan</th>
                                 <th>Konsultasi</th>
+                                <th>File</th>
                                 <th>Catatan Pembimbing</th>
                             </tr>
                         </thead>
@@ -82,11 +84,15 @@
                             @foreach ($konsul as $i => $a)
                                 <tr>
                                     <td>{{ $i + 1 }}</td>
-                                    <td>{{ $a['hari'] }}, {{ $a['tgl'] }} {{ $a['waktuhadir'] }} -
-                                        {{ $a['waktupulang'] }}</td>
-                                    <td>{{ $mhs->where('id', $a->id)[0]['nama_mhs'] }}</td>
+                                    <td>
+                                        {{ $a['hari'] }}, {{ $a['tgl'] }} {{ $a['waktuhadir']}} -
+                                        {{ $a['waktupulang'] }}
+                                    </td>
+                                    <td>{{ optional($mhs->firstwhere('id', $a->id_mahasiswa))->nama_mhs }}</td>
+                                    <td>{{ optional($pbb->firstwhere('id', optional($mhs->firstwhere('id', $a->id_mahasiswa))->id_pbb))->nama }}</td>
                                     <td>{{ $a['kemajuan'] }}</td>
                                     <td>{{ $a['konsultasi'] }}</td>
+                                    <td>{{ $a['file'] }}</td>
                                     <td>{{ $a['catatan_ppb'] ?? 'belum ada catatan pembimbing' }}</td>
                                 </tr>
                             @endforeach
@@ -105,6 +111,7 @@
                             <tr role="row">
                                 <th style="width:40px;">No.</th>
                                 <th>Nama Mahasiswa</th>
+                                <th>Nama Pembimbing</th>
                                 <th>Tanggal Daftar</th>
                                 <th>status kelayakan</th>
                                 <th>Keterangan</th>
@@ -114,7 +121,8 @@
                             @foreach ($kelayakan as $i => $a)
                                 <tr>
                                     <td>{{ $i + 1 }}</td>
-                                    <td>{{ $mhs->where('id', $a->id)[0]['nama_mhs'] ?? '' }}</td>
+                                    <td>{{ $mhs->where('id', $a->id)->first()->nama_mhs }}</td>
+                                    <td>{{ $pbb->where('id', $mhs->where('id', $a->id)->first()->id_pbb)->first()->nama }}</td>
                                     <td>{{ $a->tgl_daftar }}</td>
                                     <td>{{ $a->status_kelayakan }}</td>
                                     <td>{{ $a->ket }}</td>

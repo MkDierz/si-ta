@@ -23,6 +23,7 @@ $columns = [
         'Jam Hadir',
         'Kemajuan',
         'Konsultasi',
+        'File',
         'Catatan Pembimbing',
         'Action'
     ],
@@ -101,11 +102,12 @@ function searchForId($id, $array)
                         <tbody>
                             @foreach ($konsul as $i => $a)
                                 <tr>
-                                    <td>{{ searchForId($a['id_mahasiswa'], $mhs) }}</td>
+                                    <td>{{ searchForId($a['id_mahasiswa'], $mhs) ?? ''}}</td>
                                     <td>{{ $a['tgl'] . ', ' . $a['hari'] }}</td>
                                     <td>{{ $a['waktuhadir'] . ' - ' . $a['waktupulang'] }}</td>
                                     <td>{{ $a['kemajuan'] }}</td>
                                     <td>{{ $a['konsultasi'] }}</td>
+                                    <td>{{ $a['file'] }}</td>
                                     <td>{{ $a['catatan_ppb'] }}</td>
                                     <nobr>
                                         <td>
@@ -143,7 +145,7 @@ function searchForId($id, $array)
                         <tbody>
                             @foreach ($kelayakan as $i => $a)
                             <tr>
-                                <td>{{ searchForId($a['id_mahasiswa'], $mhs) }}</td>
+                                <td>{{ searchForId($a['id_mahasiswa'], $mhs) ?? ''}}</td>
                                 <td>{{ $a['tgl_daftar'] }}</td>
                                 <td>{{ $a['status_kelayakan'] }}</td>
                                 <td>{{ $a['ket'] }}</td>
