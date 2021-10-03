@@ -40,7 +40,7 @@ class Mahasiswa extends Controller
         $id_mahasiswa = Mhs::where('NIM', $nim)->get('id')->toArray()[0]['id'];
         $input['id_mahasiswa'] = $id_mahasiswa;
 
-        $name = $nim . '-' . $request->tgl . '' . $request->waktuhadir;
+        $name = $nim . '-' . time();
         if ($file = $request->file('file')) {
             $destinationPath = 'uploads/';
             $filename = $name . "." . $file->getClientOriginalExtension();
