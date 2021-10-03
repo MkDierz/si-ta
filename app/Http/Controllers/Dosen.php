@@ -42,7 +42,7 @@ class Dosen extends Controller
     {
         $id_mahasiswa = Kehadiran::where('id', $id)->first('id_mahasiswa')['id_mahasiswa'];
         $data = Kehadiran::where('id', $id)->first();
-        $mhs = Mahasiswa::where('id_pbb', $data['id_mahasiswa'])->first();
+        $mhs = Mahasiswa::where('id', $data['id_mahasiswa'])->first();
         return view('dosen.kehadiran', compact('data', 'mhs'));
     }
     public function konsultasi_store(Request $request, $id){
