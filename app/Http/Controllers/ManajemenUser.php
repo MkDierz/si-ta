@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Mahasiswa;
+use App\Models\Pembimbing;
 use Illuminate\Support\Facades\Hash;
 
 class ManajemenUser extends Controller
@@ -27,7 +29,22 @@ class ManajemenUser extends Controller
      */
     public function create()
     {
-        return view('admin.M_user.create');
+        $_n = User::get('nim_nip')->toArray();
+        $n = Array();
+        foreach ($_n as $i => $v) {
+            array_push($n, $v['nim_nip']);
+        }
+
+        $data = Array();
+        $mhs = Mahasiswa::get('NIM')->whereNotIn('NIM',$n)->toArray();
+        foreach ($mhs as $i => $v) {
+            array_push($data, $v['NIM']);
+        }
+        $pbb = Pembimbing::get('NIP')->whereNotIn('NIP',$n);
+        foreach ($pbb as $i => $v) {
+            array_push($data, $v['NIP']);
+        }
+        return view('admin.M_user.create', compact('data'));
     }
 
     /**
@@ -43,7 +60,13 @@ class ManajemenUser extends Controller
         }
         $request->validate($valids);
         $request['password'] = Hash::make($request->password);
-        // dd($request->all());
+
+        try {
+            $nama = Mahasiswa::where('NIM', $request->nim_nip)->get('nama_mhs')->first()->nama_mhs;
+        } catch (\Throwable $th) {
+            $nama = Pembimbing::where('NIP', $request->nim_nip)->get('nama')->first()->nama;
+        }
+        $request['name'] = $nama;
         User::create($request->all());
 
         return redirect()->route('user.index');

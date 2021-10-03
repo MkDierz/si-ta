@@ -19,13 +19,27 @@ $config = ['format' => 'YYYY-MM-DD'];
             <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group w-50">
-                    <x-adminlte-input name="name" value="" type="text" label="Nama" igroup-size="sm">
+
+                    <x-adminlte-select2 name="role" igroup-size="sm" label="role" data-placeholder="Select an option...">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-lightblue">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-car-side"></i>
                             </div>
                         </x-slot>
-                    </x-adminlte-input>
+                        <x-adminlte-options
+                            :options="['admin'=>'admin', 'pembimbing'=>'pembimbing', 'mahasiswa'=>'mahasiswa']" />
+                    </x-adminlte-select2>
+
+                    <x-adminlte-select2 name="nim_nip" igroup-size="sm" label="NIM NIP" data-placeholder="Select an option...">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-lightblue">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                        </x-slot>
+                        @foreach ($data as $d)
+                        <option value="{{$d}}">{{$d}}</option>
+                        @endforeach
+                    </x-adminlte-select2>
 
                     <x-adminlte-input name="email" value="" type="email" label="Email" igroup-size="sm">
                         <x-slot name="prependSlot">
@@ -34,24 +48,6 @@ $config = ['format' => 'YYYY-MM-DD'];
                             </div>
                         </x-slot>
                     </x-adminlte-input>
-
-                    <x-adminlte-input name="nim_nip" value="" type="text" label="NIM / NIP" igroup-size="sm">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text bg-lightblue">
-                                <i class="fas fa-key"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-input>
-
-                    <x-adminlte-select2 name="role" igroup-size="sm" label="role"
-                        data-placeholder="Select an option...">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text bg-lightblue">
-                                <i class="fas fa-car-side"></i>
-                            </div>
-                        </x-slot>
-                        <x-adminlte-options :options="['admin'=>'admin', 'pembimbing'=>'pembimbing', 'mahasiswa'=>'mahasiswa']" />
-                    </x-adminlte-select2>
 
                     <x-adminlte-input name="password" value="" type="password" label="Password" igroup-size="sm">
                         <x-slot name="prependSlot">

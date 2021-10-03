@@ -20,13 +20,16 @@ $config = ['format' => 'YYYY-MM-DD'];
             <form action="{{ route('mahasiswa.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group w-50">
-                    <x-adminlte-input name="id_pbb" value="" type="text" label="Id Pembimbing" igroup-size="sm">
+                    <x-adminlte-select2 name="id_pbb" igroup-size="sm" label="Nama Pembimbing" data-placeholder="Select an option...">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-lightblue">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-car-side"></i>
                             </div>
                         </x-slot>
-                    </x-adminlte-input>
+                        @foreach ($data as $i => $d )
+                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                        @endforeach
+                    </x-adminlte-select2>
 
                     <x-adminlte-input name="NIM" value="" type="text" label="NIM" igroup-size="sm">
                         <x-slot name="prependSlot">

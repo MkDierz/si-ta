@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Pembimbing;
 
 class DataMahasiswa extends Controller
 {
@@ -25,7 +26,8 @@ class DataMahasiswa extends Controller
      */
     public function create()
     {
-        return view('admin.D_mahasiswa.create');
+        $data = Pembimbing::get();
+        return view('admin.D_mahasiswa.create', compact('data'));
     }
 
     /**
